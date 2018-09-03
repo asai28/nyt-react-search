@@ -1,0 +1,7 @@
+.container > h1{
+    background-color: navy;
+    color: white;
+    padding: 5 5px;
+    border: solid;
+    border-color: navy;
+}

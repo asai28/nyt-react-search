@@ -1,13 +1,8 @@
 import axios from "axios";
-import "./dotenv";
 
 export default {
 
-getArticle: function(query){
-   axios.get("https://api.nytimes.com/svc/search/v2/articlesearch.json?apikey=" + apiKey, {params: {q: query}}).then(function(response){
-    return response;
-}).catch(function(err){
-    console.log(err);
-});
+getArticle: (query, begin_date, end_date) => {
+   return axios.get("https://api.nytimes.com/svc/search/v2/articlesearch.json?apikey=5c7ebdeb23d84167b5e4c923e06fd2ab", {params: {q: query, begin_date: begin_date, end_date: end_date}})
 }    
 }
