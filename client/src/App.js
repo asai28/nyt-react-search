@@ -1,11 +1,12 @@
 import React from "react";
 import Title from "./Components/Title/index";
-// import Search from "./Components/Search/index";
+import Search from "./Components/Search/index";
 import Results from "./Components/Results";
 import ResultItem from "./Components/Results/ResultItem";
 import Saved from "./Components/Saved/index";
 import SavedItem from "./Components/Saved/SavedItem";
-import API from "./utils/API"
+import API from "./utils/API";
+import Input from "./Components/Input/index";
 
 class App extends React.Component{
     constructor(props){
@@ -30,36 +31,34 @@ class App extends React.Component{
 
     handleSubmit = event => {
         event.preventDefault();
-        API.getArticle(this.state.articles)
+        API.getArticle("Obama", "20170101", "20180101")
         .then(res => this.setState({ articles: res.data.response.docs }))
         .catch(err => console.log(err));
     }
-
-    
 
     render(){
         return (
             <div>
             <Title />
-            {/* <Search search={this.state.search} startDate={this.state.startDate} endDate={this.state.endDate} onChange={this.handleInputChange} /> */}
+            {/* <Search search={this.state.search} startdate={this.state.startdate} enddate={this.state.enddate} /> */}
             <div className="container">
-                <h3>Search</h3>
-                <form>
-                        <div className="form-group">
-                            <label htmlFor="Topic">Topic: {this.state.search}</label>
-                            <input type="text" className="form-control" placeholder="Enter topic" value={this.state.search} onChange={this.handleInputChange}/>
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="startYear">Start Year</label>
-                            <input type="text" className="form-control" placeholder="Enter start year" value={this.state.startDate} onChange={this.handleInputChange} />
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="endYear">End Year</label>
-                            <input type="text" className="form-control" placeholder="Enter end year" value={this.state.endDate} onChange={this.handleInputChange} />
-                        </div>
-                        <button className="btn btn-primary" onClick={this.handleSubmit}>Search</button>
-                </form>
-            </div>
+        <h3>Search</h3>
+        <form>
+                <div className="form-group">
+                    <label htmlFor="Topic">Topic</label>
+                    <input className="form-control" placeholder="Enter a topic to search" search={this.state.search} onChange={this.handleInputChange}/>
+                </div>
+                <div className="form-group">
+                    <label htmlFor="startYear">Start Year</label>
+                    <input className="form-control"  placeholder="Enter start year" startdate={this.state.startdate} onChange={this.handleInputChange} />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="endYear">End Year</label>
+                    <input className="form-control"  placeholder="Enter end year" enddate={this.state.enddate} onChange={this.handleInputChange}/>
+                </div>
+                <button className="btn btn-primary" onClick={this.handleSubmit}>Search</button>
+        </form>
+        </div>
             <Results>
                 {(this.state.articles)? this.state.articles.map(article => <li className="list-group-item"><ResultItem 
                     key = {article._id}
@@ -70,7 +69,7 @@ class App extends React.Component{
                 /></li>) : <h4>No articles to display</h4>}
             </Results>
             <Saved>
-                {(this.state.articles) ? this.state.articles.map(article => <li className="list-group-item"><SavedItem 
+                {(this.state.articles.saved) ? this.state.articles.map(article => <li className="list-group-item"><SavedItem 
                     key = {article._id}
                     id = {article._id}
                     title = {article.headline.main}

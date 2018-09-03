@@ -12,13 +12,13 @@ const Search = props => {
                 </div>
                 <div className="form-group">
                     <label htmlFor="startYear">Start Year</label>
-                    <input type="text" className="form-control" placeholder="Enter start year" startDate={props.startDate} onChange={this.handleInputChange} />
+                    <input type="text" className="form-control" placeholder="Enter start year" startdate={props.startdate} onChange={this.handleInputChange} />
                 </div>
                 <div className="form-group">
                     <label htmlFor="endYear">End Year</label>
-                    <input type="text" className="form-control" placeholder="Enter end year" endDate={props.endDate} onChange={this.handleInputChange} />
+                    <input type="text" className="form-control" placeholder="Enter end year" enddate={props.enddate} onChange={this.handleInputChange}/>
                 </div>
-                <button className="btn btn-primary" onClick={() => this.handleClick}>Search</button>
+                <button className="btn btn-primary" onClick={this.handleSubmit}>Search</button>
         </form>
         </div>
     )

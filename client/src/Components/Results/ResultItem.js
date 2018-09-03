@@ -6,7 +6,7 @@ const ResultItem = props => {
         <div id={props.id}>
         <span className="item">{props.title}</span><br/>
         <span>{props.date}</span><br/>
-        <button className="btn btn-success">Save</button>
+        <button className="btn btn-success" onClick={this.save}>Save</button>
         </div>
     )
 }
