@@ -19,6 +19,10 @@ app.use(
   })
 );
 
+app.get("/", function(req, res){
+  res.send("Hello");
+})
+
 // Database configuration
 var databaseUrl = "notetaker";
 var collections = ["notes"];
