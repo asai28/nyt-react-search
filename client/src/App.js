@@ -1,12 +1,11 @@
 import React from "react";
 import Title from "./Components/Title/index";
-import Search from "./Components/Search/index";
-import Results from "./Components/Results";
-import ResultItem from "./Components/Results/ResultItem";
-import Saved from "./Components/Saved/index";
-import SavedItem from "./Components/Saved/SavedItem";
 import API from "./utils/API";
-import Input from "./Components/Input/index";
+import Home from "./Pages/Home";
+import Saved from "./Pages/Saved";
+import NoMatch from "./Pages/NoMatch";
+//import Input from "./Components/Input/index";
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 
 class App extends React.Component{
     constructor(props){
@@ -38,46 +37,16 @@ class App extends React.Component{
 
     render(){
         return (
+            <Router>
             <div>
             <Title />
-            {/* <Search search={this.state.search} startdate={this.state.startdate} enddate={this.state.enddate} /> */}
-            <div className="container">
-        <h3>Search</h3>
-        <form>
-                <div className="form-group">
-                    <label htmlFor="Topic">Topic</label>
-                    <input className="form-control" placeholder="Enter a topic to search" search={this.state.search} onChange={this.handleInputChange}/>
-                </div>
-                <div className="form-group">
-                    <label htmlFor="startYear">Start Year</label>
-                    <input className="form-control"  placeholder="Enter start year" startdate={this.state.startdate} onChange={this.handleInputChange} />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="endYear">End Year</label>
-                    <input className="form-control"  placeholder="Enter end year" enddate={this.state.enddate} onChange={this.handleInputChange}/>
-                </div>
-                <button className="btn btn-primary" onClick={this.handleSubmit}>Search</button>
-        </form>
-        </div>
-            <Results>
-                {(this.state.articles)? this.state.articles.map(article => <li className="list-group-item"><ResultItem 
-                    key = {article._id}
-                    id = {article._id}
-                    title = {article.headline.main}
-                    date = {article.pub_date}
-                    saved = {false}
-                /></li>) : <h4>No articles to display</h4>}
-            </Results>
-            <Saved>
-                {(this.state.articles.saved) ? this.state.articles.map(article => <li className="list-group-item"><SavedItem 
-                    key = {article._id}
-                    id = {article._id}
-                    title = {article.headline.main}
-                    saved = {article.saved}
-                    notes = {article.notes}
-                /></li>): <h4>No saved articles</h4>}
-            </Saved>
+            <Switch>
+                <Route exact path="/" component={Home}/>
+                <Route exact path="/saved" component={Saved}/>
+                <Route component={NoMatch}/>
+            </Switch>
             </div>
+            </Router>
         )
     }
 
